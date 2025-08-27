@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resizer</title>
+</head>
+<body>
+    <h1>Image Resizer</h1>
+    <form id="upload-form">
+        <input type="file" id="image-input" accept="image/*">
+    </form>
+    <div id="image-container">
+        <img id="uploaded-image" src="#" alt="uploaded-image">
+    </div>
+    <button id="resize-button-instagram">INSTAGRAM PROFILE (320x320)</button>
+    <button id="resize-button-facebook">FACEBOOK PROFILE (170 x 170)</button>
+    <button id="resize-button-x">X Profile (400 x 400) </button>
+    <button id="resize-button-linkedin">LinkedIn Profile (300 x 300)</button>
+
+    <script>
+        document.getElementById('image-input').addEventListener('change', function () {
+            const imageContainer = document.getElementById('image-container');
+            const uploadedImage = document.getElementById('uploaded-image');
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    uploadedImage.src = e.target.result;
+                    imageContainer.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                imageContainer.style.display = 'none';
+            }
+        });
+
+        document.getElementById('resize-button-instagram').addEventListener('click', function () {
+            resizeImage(320,320);
+        });
+
+        document.getElementById('resize-button-facebook').addEventListener('click', function () {
+            resizeImage(170 , 170);
+        });
+
+        document.getElementById('resize-button-x').addEventListener('click', function () {
+            resizeImage(400 , 400);
+        });
+
+        document.getElementById('resize-button-linkedin').addEventListener('click', function () {
+            resizeImage(300 , 300);
+        });
+
+        function resizeImage(width, height) {
+            const uploadedImage = document.getElementById('uploaded-image');
+
+            uploadedImage.width = width;
+            uploadedImage.height = height;
+        }
+    </script>
+</body>
+</html>
